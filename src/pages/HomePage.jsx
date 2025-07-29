@@ -88,13 +88,10 @@ export default function HomePage() {
                                                     <b>Original title: </b>
                                                     {movie.original_title || movie.original_name}
                                                 </li>
-                                                <li>
+                                                <li className="language d-flex">
                                                     <b>Original language: </b>
                                                     {
-                                                        movie.original_language ?
-                                                            (
-                                                                <Flag code={movie.original_language} /> || movie.original_language
-                                                            ) : ('Not Present')
+                                                        <Flag code={movie.original_language} fallback={<span>{movie.original_language}</span>} />
                                                     }
                                                 </li>
                                                 <li>
