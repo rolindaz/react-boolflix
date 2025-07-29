@@ -65,29 +65,35 @@ export default function HomePage() {
                         filteredMovies.map((movie) => {
                             return (
                                 <div key={movie.id} className="col">
-                                    <div className="card p-2">
-                                        <ul className="list-unstyled">
-                                            <li>
-                                                <h3>
-                                                    Title: {movie.title || movie.name}
-                                                </h3>
-                                            </li>
-                                            <li>
-                                                Original title: {movie.original_title || movie.original_name}
-                                            </li>
-                                            <li>
-                                                Original language:
-                                                {
-                                                    movie.original_language ?
-                                                        (
-                                                            <Flag code={movie.original_language} /> || movie.original_language
-                                                        ) : ('Not Present')
-                                                }
-                                            </li>
-                                            <li>
-                                                Vote: {movie.vote_average.toFixed(1)}
-                                            </li>
-                                        </ul>
+                                    <div className="card h-100 p-2">
+                                        <div className="card-top">
+                                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className="card-img-top" />
+                                        </div>
+                                        <div className="card-body">
+                                            <ul className="list-unstyled">
+                                                <li>
+                                                    <h3>
+                                                        {movie.title || movie.name}
+                                                    </h3>
+                                                </li>
+                                                <li>
+                                                    <b>Original title:</b>
+                                                    {movie.original_title || movie.original_name}
+                                                </li>
+                                                <li>
+                                                    <b>Original language:</b>
+                                                    {
+                                                        movie.original_language ?
+                                                            (
+                                                                <Flag code={movie.original_language} /> || movie.original_language
+                                                            ) : ('Not Present')
+                                                    }
+                                                </li>
+                                                <li>
+                                                    <b>Vote:</b> {movie.vote_average.toFixed(1)}
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             )
