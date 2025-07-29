@@ -77,11 +77,11 @@ export default function HomePage() {
                                                     </h3>
                                                 </li>
                                                 <li>
-                                                    <b>Original title:</b>
+                                                    <b>Original title: </b>
                                                     {movie.original_title || movie.original_name}
                                                 </li>
                                                 <li>
-                                                    <b>Original language:</b>
+                                                    <b>Original language: </b>
                                                     {
                                                         movie.original_language ?
                                                             (
@@ -90,7 +90,7 @@ export default function HomePage() {
                                                     }
                                                 </li>
                                                 <li>
-                                                    <b>Vote:</b> {movie.vote_average.toFixed(1)}
+                                                    <b>Vote: </b> {Math.ceil((movie.vote_average * 5) / 10)}
                                                 </li>
                                             </ul>
                                         </div>
