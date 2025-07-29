@@ -11,8 +11,16 @@ export default function HomePage() {
         `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`,
         `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}`
     ]
-    const api_movies_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`
-    const api_tv_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}`
+    const stars = Array(5).fill(0)
+    const fullStar = {
+        color: "#EBC346"
+    }
+    const emptyStar = {
+        color: "#CBCBCB"
+    }
+
+    /* const api_movies_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`
+    const api_tv_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}` */
 
 
     /* useEffect(() => {
@@ -90,7 +98,21 @@ export default function HomePage() {
                                                     }
                                                 </li>
                                                 <li>
-                                                    <b>Vote: </b> {Math.ceil((movie.vote_average * 5) / 10)}
+                                                    <b>Vote: </b>
+                                                    <span>
+                                                        {
+                                                            stars.map((star, index) => {
+                                                                return (
+                                                                    <i className="bi bi-star-fill"
+                                                                        key={index}
+                                                                        size={24}
+                                                                        style={Math.ceil((movie.vote_average * 5) / 10) > index ? fullStar : emptyStar}>
+                                                                    </i>
+                                                                )
+                                                            })
+                                                        }
+                                                        {` (${Math.ceil((movie.vote_average * 5) / 10)} Stars)`}
+                                                    </span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -100,7 +122,7 @@ export default function HomePage() {
                         })
                     }
                 </div>
-            </div>
+            </div >
         </>
     )
 }
