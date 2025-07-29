@@ -1,12 +1,12 @@
-import Logo from '../../logo.png'
+import Logo from '../assets/Logo.png'
 import SearchBar from './SearchBar'
 
 export default function Header() {
     return (
         <>
-            <header>
+            <header className='p-5 d-flex justify-content-between'>
                 <div className="logo">
-                    <Logo />
+                    <img src={Logo} alt="Boolflix Logo" />
                 </div>
                 <div className="searchBar">
                     <SearchBar />

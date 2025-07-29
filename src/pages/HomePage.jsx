@@ -18,9 +18,11 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="container">
-                <MoviesList />
-            </div >
+            <main>
+                <div className="container">
+                    <MoviesList />
+                </div >
+            </main>
         </>
     )
 }
