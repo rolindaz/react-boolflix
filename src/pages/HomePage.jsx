@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Flag from 'react-world-flags'
 
 export default function HomePage() {
 
@@ -57,10 +58,16 @@ export default function HomePage() {
                                                 Original title: {movie.original_title}
                                             </li>
                                             <li>
-                                                Original language: {movie.original_language}
+                                                Original language:
+                                                {
+                                                    movie.original_language ?
+                                                        (
+                                                            <Flag code={movie.original_language} /> || movie.original_language
+                                                        ) : ('Not Present')
+                                                }
                                             </li>
                                             <li>
-                                                Vote: {movie.vote_average}
+                                                Vote: {movie.vote_average.toFixed(1)}
                                             </li>
                                         </ul>
                                     </div>
