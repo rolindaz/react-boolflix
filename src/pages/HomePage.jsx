@@ -7,23 +7,41 @@ export default function HomePage() {
     const [movies, setMovies] = useState([])
     const [search, setSearch] = useState('')
     const [filteredMovies, setFilteredMovies] = useState(movies)
-    const api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`
+    const api_urls = [
+        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`,
+        `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}`
+    ]
+    const api_movies_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`
+    const api_tv_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}`
 
 
-    useEffect(() => {
-        fetch(api_url)
+    /* useEffect(() => {
+        fetch(api_movies_url)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 setMovies(data.results)
                 console.log(movies);
             })
+    }, [search]) */
+
+    useEffect(() => {
+        const fetchedResults = []
+        api_urls.map(url => fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                fetchedResults.push(...data.results)
+            }));
+        setMovies(fetchedResults)
     }, [search])
 
+    console.log(movies);
+
     function handleFormSubmit(e) {
-        console.log(search, api_url);
+        console.log(search, api_urls);
         e.preventDefault(e);
-        const searchedMovie = movies.filter(movie => movie.title.toLowerCase().includes(search.toLowerCase()))
+        const searchedMovie = movies.filter(movie => movie?.title?.toLowerCase().includes(search.toLowerCase()) || movie?.name?.toLowerCase().includes(search.toLowerCase()))
         setFilteredMovies(searchedMovie)
     }
 
@@ -51,11 +69,11 @@ export default function HomePage() {
                                         <ul className="list-unstyled">
                                             <li>
                                                 <h3>
-                                                    Title: {movie.title}
+                                                    Title: {movie.title || movie.name}
                                                 </h3>
                                             </li>
                                             <li>
-                                                Original title: {movie.original_title}
+                                                Original title: {movie.original_title || movie.original_name}
                                             </li>
                                             <li>
                                                 Original language:
