@@ -1,3 +1,4 @@
+import { useGlobalContext } from '../contexts/GlobalContext'
 import MoviesList from '../components/MoviesList'
 
 export default function HomePage() {
@@ -16,11 +17,13 @@ export default function HomePage() {
             })
     }, [search]) */
 
+    const { filteredMovies } = useGlobalContext()
+
     return (
         <>
             <main>
                 <div className="container">
-                    <MoviesList />
+                    <MoviesList filteredMovies={filteredMovies} />
                 </div >
             </main>
         </>

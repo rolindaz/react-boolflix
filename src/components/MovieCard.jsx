@@ -1,6 +1,7 @@
 import Flag from 'react-world-flags'
+import PlaceholderImg from '../assets/placeholder-img.jpg'
 
-export default function MovieCard(movie) {
+export default function MovieCard({ movie }) {
 
     const stars = Array(5).fill(0)
     const fullStar = {
@@ -14,7 +15,13 @@ export default function MovieCard(movie) {
         <div key={movie.id} className="col">
             <div className="card h-100 p-2">
                 <div className="card-top">
-                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title || movie.name} className="card-img-top" />
+                    {
+                        movie.poster_path ? (
+                            <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt={movie.title || movie.name} className="card-img-top" />
+                        ) : (
+                            <img src={PlaceholderImg} alt={movie.title || movie.name} className="card-img-top" />
+                        )
+                    }
                 </div>
                 <div className="card-body">
                     <ul className="list-unstyled">

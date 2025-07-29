@@ -10,7 +10,7 @@ export default function MoviesList() {
             {
                 filteredMovies.map((movie) => {
                     return (
-                        <MovieCard />
+                        <MovieCard key={movie.id} movie={movie} lorem="x" />
                     )
                 })
             }
