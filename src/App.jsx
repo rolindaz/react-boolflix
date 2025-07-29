@@ -1,3 +1,4 @@
+import { GlobalProvider } from "./contexts/GlobalContext"
 import HomePage from "./pages/HomePage"
 
 
@@ -5,7 +6,9 @@ function App() {
 
   return (
     <>
-      <HomePage />
+      <GlobalProvider>
+        <HomePage />
+      </GlobalProvider>
     </>
   )
 }
