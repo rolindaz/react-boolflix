@@ -1,3 +1,4 @@
+import ReadMore from './ReadMore'
 import Flag from 'react-world-flags'
 import PlaceholderImg from '../assets/placeholder-img.jpg'
 
@@ -17,7 +18,7 @@ export default function MovieCard({ movie }) {
                 <div className="card-top h-100 top-1">
                     {
                         movie.poster_path ? (
-                            <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt={movie.title || movie.name} className="card-img-top" />
+                            <img src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`} alt={movie.title || movie.name} />
                         ) : (
                             <img src={PlaceholderImg} alt={movie.title || movie.name} className="card-img-top" />
                         )
@@ -60,9 +61,7 @@ export default function MovieCard({ movie }) {
                         <li className="list-group-item">
                             <b>Overview: </b>
                             <br />
-                            <span>
-                                {movie.overview}
-                            </span>
+                            <ReadMore text={movie.overview} />
                         </li>
                     </ul>
                 </div>
