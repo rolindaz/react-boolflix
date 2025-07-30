@@ -22,9 +22,7 @@ export default function HomePage() {
     return (
         <>
             <main>
-                <div className="container">
-                    <MediaList filteredMedia={filteredMedia} />
-                </div >
+                <MediaList filteredMedia={filteredMedia} />
             </main>
         </>
     )

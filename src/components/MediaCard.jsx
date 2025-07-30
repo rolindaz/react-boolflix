@@ -14,7 +14,7 @@ export default function MediaCard({ item }) {
 
     return (
         <div key={item.id} className="col">
-            <div className="card h-100 p-2">
+            <div className="card position-relative overflow-hidden h-100 p-2">
                 <div className="card-top h-100 top-1">
                     {
                         item.poster_path ? (
