@@ -4,42 +4,62 @@ const GlobalContext = createContext()
 
 function GlobalProvider({ children }) {
     const api_key = import.meta.env.VITE_API_KEY
-    const [movies, setMovies] = useState([])
+    const [media, setMedia] = useState([])
     const [search, setSearch] = useState('')
-    const [filteredMovies, setFilteredMovies] = useState(movies)
+    const [filteredMedia, setFilteredMedia] = useState(media)
     const api_urls = [
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`,
-        `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}`
+        {
+            url: `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${search}`,
+            mediaType: 'Movie'
+        },
+        {
+            url: `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&query=${search}`,
+            mediaType: 'TV Show'
+        }
     ]
 
     useEffect(() => {
         const fetchedResults = []
-        api_urls.map(url => fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                fetchedResults.push(...data.results)
-            }));
-        setMovies(fetchedResults)
+        api_urls.map(url => {
+            const mediaType = url.mediaType;
+            fetch(url.url)
+                .then(res => res.json())
+                .then(data => {
+                    const newData = data.results.map(obj => {
+                        return (
+                            {
+                                ...obj,
+                                mediaType: mediaType
+                            }
+                        )
+                    });
+                    console.log(newData);
+                    fetchedResults.push(...newData);
+                });
+        });
+        console.log(fetchedResults);
+        setMedia(fetchedResults)
     }, [search])
 
-    console.log(movies);
+    console.log(media);
 
     function handleFormSubmit(e) {
         console.log(search, api_urls);
         e.preventDefault(e);
-        const searchedMovie = movies.filter(movie => movie?.title?.toLowerCase().includes(search.toLowerCase()) || movie?.name?.toLowerCase().includes(search.toLowerCase()))
-        setFilteredMovies(searchedMovie)
+        const searchedMedia = media.filter(item => item?.title?.toLowerCase().includes(search.toLowerCase()) || item?.name?.toLowerCase().includes(search.toLowerCase()))
+        console.log(searchedMedia);
+        setFilteredMedia(searchedMedia)
     }
+    console.log(filteredMedia);
 
     return (
         <GlobalContext.Provider value={{
-            movies,
-            setMovies,
+            media,
+            setMedia,
             search,
             setSearch,
-            filteredMovies,
-            setFilteredMovies,
+            filteredMedia,
+            setFilteredMedia,
             handleFormSubmit
         }}>
             {children}

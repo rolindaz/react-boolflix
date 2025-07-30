@@ -4,7 +4,7 @@ export default function ReadMore({ text }) {
 
     const [isExpanded, setIsExpanded] = useState(false)
 
-    if (text.length <= 508) {
+    if (text.length <= 325) {
         return (
             <p>
                 {text}
@@ -21,7 +21,7 @@ export default function ReadMore({ text }) {
                     role="button"
                     onClick={() => setIsExpanded(!isExpanded)}
                 >
-                    {isExpanded ? 'show less' : 'show more'}
+                    {isExpanded ? 'read less' : 'read more'}
                 </span>
             </p >
         )

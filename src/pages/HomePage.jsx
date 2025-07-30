@@ -1,5 +1,5 @@
 import { useGlobalContext } from '../contexts/GlobalContext'
-import MoviesList from '../components/MoviesList'
+import MediaList from '../components/MediaList'
 
 export default function HomePage() {
 
@@ -17,13 +17,13 @@ export default function HomePage() {
             })
     }, [search]) */
 
-    const { filteredMovies } = useGlobalContext()
+    const { filteredMedia } = useGlobalContext()
 
     return (
         <>
             <main>
                 <div className="container">
-                    <MoviesList filteredMovies={filteredMovies} />
+                    <MediaList filteredMedia={filteredMedia} />
                 </div >
             </main>
         </>
